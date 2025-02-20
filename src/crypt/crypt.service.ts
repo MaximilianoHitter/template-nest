@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as CryptoJs from 'crypto-js';
 
@@ -14,10 +14,14 @@ export class CryptService {
   }
 
   decrypt(encriptedText: string): string {
-    const bytes = CryptoJs.AES.decrypt(
-      encriptedText,
-      this.configService.get('SECRET_CRYPT'),
-    );
-    return bytes.toString(CryptoJs.enc.Utf8);
+    try {
+      const bytes = CryptoJs.AES.decrypt(
+        encriptedText,
+        this.configService.get('SECRET_CRYPT'),
+      );
+      return bytes.toString(CryptoJs.enc.Utf8);
+    } catch (error) {
+      throw new BadRequestException('Crypt exception');
+    }
   }
 }

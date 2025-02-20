@@ -1,13 +1,20 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Request,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import AuthGuard from 'src/auth/guard/auth.guard';
 
 @Controller('users')
 export class UsersController {
-  constructor() {}
+  constructor() { }
 
   @Get('me')
   @UseGuards(AuthGuard)
   me(@Request() req) {
+    // throw new UnauthorizedException('error de prueba');
     return {
       user: req.user,
     };
