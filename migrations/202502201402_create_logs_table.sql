@@ -5,7 +5,7 @@ CREATE TABLE logs(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
     level varchar(255) COMMENT 'Nivel',
     user_id INT NULL COMMENT 'User Id',
-    message varchar(255) COMMENT 'Mensaje',
-    stack decimal(10,2) COMMENT 'Stack',
+    message text NULL COMMENT 'Mensaje',
+    stack text NULL COMMENT 'Stack',
     created_at DATETIME COMMENT 'Create Time'
 ) COMMENT 'logs_table';
