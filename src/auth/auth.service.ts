@@ -13,7 +13,7 @@ export class AuthService {
     private readonly configService: ConfigService,
     @Inject('CACHE_MANAGER') private readonly cache: Cache,
     private readonly userRepository: UserRepository,
-  ) { }
+  ) {}
 
   getToken(user_id: number): string {
     const token: Token = {

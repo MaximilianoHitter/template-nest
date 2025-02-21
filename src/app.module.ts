@@ -8,7 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CryptModule } from './crypt/crypt.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ActivitiesModule } from './activities/activities.module';
 import * as redisStore from 'cache-manager-redis-store';
+import { EntitySubscriber } from './activities/entity.suscriber';
 
 @Module({
   imports: [
@@ -25,6 +27,7 @@ import * as redisStore from 'cache-manager-redis-store';
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
+      subscribers: [EntitySubscriber],
     }),
     CacheModule.register({
       store: redisStore,
@@ -39,6 +42,7 @@ import * as redisStore from 'cache-manager-redis-store';
     UsersModule,
     AuthModule,
     CryptModule,
+    ActivitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
